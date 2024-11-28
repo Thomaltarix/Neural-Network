@@ -15,11 +15,13 @@ all: compile
 
 compile:
 	cd torch_generator && cargo build && cd .. ; \
-	cd torch_analyzer && cargo build && cd ..
+	cd torch_analyzer && cargo build && cd .. ; \
+	mv debug/$(NAME1) .
+	mv debug/$(NAME2) .
+	rm -rf debug
+	rm -f .rustc_info.json
 
 clean:
-	cd torch_generator && cargo clean && cd .. ; \
-	cd torch_analyzer && cargo clean && cd ..
 
 fclean: clean
 	rm  -f $(NAME1) $(NAME2)
