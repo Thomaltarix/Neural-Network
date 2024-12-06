@@ -1,0 +1,60 @@
+{
+    "learningRate": 0.1,
+    "layers": [
+        [
+            {
+                "weights": [
+                    0.1,
+                    0.2
+                ],
+                "bias": 0.3,
+                "activation": ""
+            },
+            {
+                "weights": [
+                    0.4,
+                    0.5
+                ],
+                "bias": 0.6,
+                "activation": ""
+            }
+        ],
+        [
+            {
+                "weights": [
+                    0.7,
+                    0.8
+                ],
+                "bias": 0.9,
+                "activation": ""
+            },
+            {
+                "weights": [
+                    0.10,
+                    0.11
+                ],
+                "bias": 0.12,
+                "activation": ""
+            },
+            {
+                "weights": [
+                    0.13,
+                    0.14
+                ],
+                "bias": 0.15,
+                "activation": ""
+            }
+        ],
+        [
+            {
+                "weights": [
+                    0.16,
+                    0.17,
+                    0.18
+                ],
+                "bias": 0.19,
+                "activation": ""
+            }
+        ]
+    ]
+}
