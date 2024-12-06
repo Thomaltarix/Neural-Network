@@ -53,12 +53,12 @@ impl fmt::Display for Piece {
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
-pub struct Case {
+pub struct ChessBox {
     piece: Option<Piece>,
     position: (u8, u8),
 }
 
-impl fmt::Display for Case {
+impl fmt::Display for ChessBox {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self.piece {
             Some(piece) => write!(f, "{} at position {:?}", piece, self.position),
@@ -69,7 +69,7 @@ impl fmt::Display for Case {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ChessBoard {
-    board: Vec<Vec<Case>>,
+    board: Vec<Vec<ChessBox>>,
 }
 
 impl fmt::Display for ChessBoard {
@@ -161,9 +161,9 @@ impl Piece {
     }
 }
 
-impl Case {
-    pub fn new(piece: Option<Piece>, position: (u8, u8)) -> Case {
-        Case {
+impl ChessBox {
+    pub fn new(piece: Option<Piece>, position: (u8, u8)) -> ChessBox {
+        ChessBox {
             piece,
             position,
         }
@@ -194,7 +194,7 @@ impl ChessBoard {
         for i in 0..8 {
             let mut row = Vec::new();
             for j in 0..8 {
-                row.push(Case::new(None, (i, j)));
+                row.push(ChessBox::new(None, (i, j)));
             }
             board.push(row);
         }
@@ -202,17 +202,17 @@ impl ChessBoard {
     }
 
     //getters
-    pub fn get_board(&self) -> Vec<Vec<Case>> {
+    pub fn get_board(&self) -> Vec<Vec<ChessBox>> {
         self.board.clone()
     }
 
     //setters
-    pub fn set_board(&mut self, board: Vec<Vec<Case>>) {
+    pub fn set_board(&mut self, board: Vec<Vec<ChessBox>>) {
         self.board = board;
     }
 
     pub fn set_case(&mut self, piece: Option<Piece>, position: (u8, u8)) {
-        self.board[position.0 as usize][position.1 as usize] = Case::new(piece, position);
+        self.board[position.0 as usize][position.1 as usize] = ChessBox::new(piece, position);
     }
 }
 
