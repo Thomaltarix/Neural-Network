@@ -1,1 +1,1 @@
-pub mod ChessboardParser;
+pub mod chessboard_parser;

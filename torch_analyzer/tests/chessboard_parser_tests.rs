@@ -1,4 +1,4 @@
-use my_torch_analyzer::ChessboardParser::{ChessboardParser, ChessBoard, Piece, ChessColor, ChessPiece};
+use my_torch_analyzer::chessboard_parser::{ChessboardParser, ChessBoard, Piece, ChessColor, ChessPiece};
 
 use std::sync::LazyLock;
 
