@@ -2,8 +2,7 @@ use std::io::Read;
 use crate::models::Configuration;
 
 pub fn get_full_path_file(path : String) -> String {
-    let tmp_path = format!("{}{}", std::env::current_dir().unwrap().to_str().unwrap(), "/");
-    format!("{}{}", tmp_path, path)
+    let tmp_path = format!("{}/{}", std::env::current_dir().unwrap().to_str().unwrap(), path);
 }
 
 fn get_content_from_file(path : String) -> String {
