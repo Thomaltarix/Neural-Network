@@ -2,7 +2,7 @@ use std::fs::File;
 use std::io::Write;
 use std::vec::Vec;
 use my_torch_generator::models::Configuration;
-use my_torch_generator::parsing::command_line_parsing::get_full_path_file;
+use my_torch_generator::parsing::get_full_path_file;
 use my_torch_generator::parsing::parse_command_line_arguments;
 
 fn create_files(configs: Vec<(String, Configuration)>) -> std::io::Result<()>{
