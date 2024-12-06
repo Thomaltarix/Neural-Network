@@ -20,13 +20,6 @@ impl Configuration {
             layers: json_elem.layers,
         }
     }
-
-    pub fn println(&self) {
-        println!("input_by_input_neuron: {}", self.input_by_input_neuron);
-        println!("bias: {}", self.bias);
-        println!("learning_rate: {}", self.learning_rate);
-        println!("layers: {:?}", self.layers);
-    }
 }
 
 impl fmt::Display for Configuration {
