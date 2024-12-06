@@ -1,3 +1,5 @@
+use core::fmt;
+
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub enum ChessPiece {
     Pawn,
@@ -8,10 +10,34 @@ pub enum ChessPiece {
     King,
 }
 
+impl fmt::Display for ChessPiece {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let piece = match self {
+            ChessPiece::Pawn => "Pawn",
+            ChessPiece::Rook => "Rook",
+            ChessPiece::Knight => "Knight",
+            ChessPiece::Bishop => "Bishop",
+            ChessPiece::Queen => "Queen",
+            ChessPiece::King => "King",
+        };
+        write!(f, "{}", piece)
+    }
+}
+
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub enum ChessColor {
     White,
     Black,
+}
+
+impl fmt::Display for ChessColor {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let color = match self {
+            ChessColor::White => "White",
+            ChessColor::Black => "Black",
+        };
+        write!(f, "{}", color)
+    }
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
@@ -20,15 +46,49 @@ pub struct Piece {
     color: ChessColor,
 }
 
+impl fmt::Display for Piece {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{} {}", self.color, self.piece)
+    }
+}
+
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub struct Case {
     piece: Option<Piece>,
     position: (u8, u8),
 }
 
+impl fmt::Display for Case {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self.piece {
+            Some(piece) => write!(f, "{} at position {:?}", piece, self.position),
+            None => write!(f, "Empty case at position {:?}", self.position),
+        }
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ChessBoard {
     board: Vec<Vec<Case>>,
+}
+
+impl fmt::Display for ChessBoard {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let mut board_str = String::new();
+        board_str.push_str("Chessboard: {\n");
+        for row in self.board.iter() {
+            board_str.push_str(&format!("\tColone {}: {{\n", row[0].position.0));
+            for case in row.iter() {
+                match case.piece {
+                    Some(piece) => board_str.push_str(&format!("\t\tCase {}: {},\n", case.get_position().1, piece)),
+                    None => board_str.push_str(&format!("\t\tCase {}: Empty case,\n", case.get_position().1)),
+                }
+            }
+            board_str.push_str("\t},\n");
+        }
+        board_str.push_str("}");
+        write!(f, "{}", board_str)
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
