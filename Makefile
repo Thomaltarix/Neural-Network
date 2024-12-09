@@ -1,6 +1,6 @@
 ##
 ## EPITECH PROJECT, 2024
-## Gomoku
+## My_Torch
 ## File description:
 ## Makefile
 ##
