@@ -14,11 +14,12 @@ NAME2 = my_torch_analyzer
 all: compile
 
 compile:
-	cd torch_generator && cargo build && cd .. ; \
-	cd torch_analyzer && cargo build && cd .. ; \
-	mv debug/$(NAME1) .
-	mv debug/$(NAME2) .
+	cd torch_generator && cargo build --release --offline && cd .. ; \
+	cd torch_analyzer && cargo build --release --offline && cd .. ; \
+	cp release/$(NAME1) .
+	cp release/$(NAME2) .
 	rm -rf debug
+	rm -rf release
 	rm -f .rustc_info.json
 
 clean:
