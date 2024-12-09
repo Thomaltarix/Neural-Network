@@ -8,6 +8,7 @@ pub struct Configuration {
     pub bias: f64,
     pub learning_rate: f64,
     pub layers: Vec<u8>,
+    pub activation: String,
 }
 
 impl Configuration {
@@ -18,12 +19,13 @@ impl Configuration {
             bias: json_elem.bias,
             learning_rate: json_elem.learning_rate,
             layers: json_elem.layers,
+            activation: json_elem.activation
         }
     }
 }
 
 impl fmt::Display for Configuration {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "input_by_input_neuron: {}\nbias: {}\nlearning_rate: {}\nlayers: {:?}", self.input_by_input_neuron, self.bias, self.learning_rate, self.layers)
+        write!(f, "input_by_input_neuron: {}\nbias: {}\nlearning_rate: {}\nlayers: {:?}\nactivation: {}", self.input_by_input_neuron, self.bias, self.learning_rate, self.layers, self.activation)
     }
 }
