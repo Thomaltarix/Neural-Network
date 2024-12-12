@@ -21,7 +21,31 @@ fn create_files(configs: Vec<(String, Configuration)>) {
     }
 }
 
+fn display_help() {
+    println!("USAGE\n\
+    \t./my_torch_generator config_file_1 nb_1 [config_file_2 nb_2...]\n\n\
+    DESCRIPTION\n\
+    \tconfig_file_i\tConfiguration file containing description of the neural network we want to generate.\n\
+    \tnb_i\t\tNumber of neural networks we want to generate from the configuration file.\n");
+}
+
+fn check_help_option() -> bool{
+    let args: Vec<String> = std::env::args().collect();
+    if (args.len() == 2 && args[1] == "-h") || (args.len() == 2 && args[1] == "--help") {
+        display_help();
+        return true;
+    }
+    false
+}
+
 fn main() {
+    if check_help_option() {
+        std::process::exit(0);
+    }
     let tmp : Vec<(String, Configuration)> = parse_command_line_arguments();
-    create_files(tmp)
+    if tmp.is_empty() {
+        display_help();
+        std::process::exit(84);
+    }
+    create_files(tmp);
 }
