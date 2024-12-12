@@ -5,7 +5,7 @@ use my_torch_generator::models::{Configuration, NeuralNetwork};
 use my_torch_generator::parsing::get_full_path_file;
 use my_torch_generator::parsing::parse_command_line_arguments;
 
-fn create_files(configs: Vec<(String, Configuration)>) -> i32 {
+fn create_files(configs: Vec<(String, Configuration)>) {
     for (i, config) in configs.iter().enumerate() {
         let mut complete_file_path = get_full_path_file(String::new());
         let file_name : Vec<&str> = config.0.split("/").collect();
@@ -19,7 +19,6 @@ fn create_files(configs: Vec<(String, Configuration)>) -> i32 {
         let nn = NeuralNetwork::new(config.1.clone());
         file.write_all(nn.get_json().as_bytes()).expect("Unable to write data");
     }
-    0
 }
 
 fn display_help() {
@@ -48,5 +47,5 @@ fn main() {
         display_help();
         std::process::exit(84);
     }
-    std::process::exit(create_files(tmp));
+    create_files(tmp);
 }
