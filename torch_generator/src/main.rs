@@ -5,7 +5,7 @@ use my_torch_generator::models::{Configuration, NeuralNetwork};
 use my_torch_generator::parsing::get_full_path_file;
 use my_torch_generator::parsing::parse_command_line_arguments;
 
-fn create_files(configs: Vec<(String, Configuration)>) {
+fn create_files(configs: Vec<(String, Configuration)>) -> i32 {
     for (i, config) in configs.iter().enumerate() {
         let mut complete_file_path = get_full_path_file(String::new());
         let file_name : Vec<&str> = config.0.split("/").collect();
@@ -19,9 +19,34 @@ fn create_files(configs: Vec<(String, Configuration)>) {
         let nn = NeuralNetwork::new(config.1.clone());
         file.write_all(nn.get_json().as_bytes()).expect("Unable to write data");
     }
+    0
+}
+
+fn display_help() {
+    println!("USAGE\n\
+    \t./my_torch_generator config_file_1 nb_1 [config_file_2 nb_2...]\n\n\
+    DESCRIPTION\n\
+    \tconfig_file_i\tConfiguration file containing description of the neural network we want to generate.\n\
+    \tnb_i\t\tNumber of neural networks we want to generate from the configuration file.\n");
+}
+
+fn check_help_option() -> bool{
+    let args: Vec<String> = std::env::args().collect();
+    if (args.len() == 2 && args[1] == "-h") || (args.len() == 2 && args[1] == "--help") {
+        display_help();
+        return true;
+    }
+    false
 }
 
 fn main() {
+    if check_help_option() {
+        std::process::exit(0);
+    }
     let tmp : Vec<(String, Configuration)> = parse_command_line_arguments();
-    create_files(tmp)
+    if tmp.is_empty() {
+        display_help();
+        std::process::exit(84);
+    }
+    std::process::exit(create_files(tmp));
 }

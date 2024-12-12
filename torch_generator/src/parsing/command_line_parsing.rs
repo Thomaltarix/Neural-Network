@@ -45,8 +45,5 @@ pub fn parse_command_line_arguments() -> Vec<(String, Configuration)> {
     if pair == true {
         config.clear();
     }
-    if config.is_empty() {
-        panic!("No configuration found");
-    }
     config
 }
