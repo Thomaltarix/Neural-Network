@@ -1,0 +1,23 @@
+{
+  "learning_rate": 0.1,
+  "layers": [
+    [
+      {
+        "weights": [
+          0.7822810568974475
+        ],
+        "bias": 1.0,
+        "activation": "test"
+      }
+    ],
+    [
+      {
+        "weights": [
+          0.777320388653883
+        ],
+        "bias": 1.0,
+        "activation": "test"
+      }
+    ]
+  ]
+}
