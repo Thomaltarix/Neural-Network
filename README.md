@@ -202,3 +202,4 @@ fn test_activation_function() {
 ### References
 - [FEN Notation](https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation)
 - [Hyperparameter Optimization](https://en.wikipedia.org/wiki/Hyperparameter_optimization)
+- [Rust Benchmark](https://blog.lesjeudis.com/rust-le-nouveau-pilier-de-la-data-science#:~:text=Ses%20performances%20exceptionnelles&text=Bien%20que%20Python%20soit%20le,instructions%20machine%20de%20bas%20niveau)
