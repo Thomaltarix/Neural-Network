@@ -1,4 +1,8 @@
 use std::fmt::Display;
+use std::fs::File;
+use std::io::Read;
+use my_torch_analyzer::models::NeuralNetworkData;
+use my_torch_analyzer::neural_network::NeuralNetwork;
 
 #[derive (PartialEq, Debug)]
 enum Mode {
@@ -90,13 +94,21 @@ fn verify_files_exist(load_file: &str, file: &str) -> bool {
     false
 }
 
+fn get_full_path_file(path : String) -> String {
+    format!("{}/{}", std::env::current_dir().unwrap().to_str().unwrap(), path)
+}
+
+fn get_file_content(path : String) -> String {
+    let mut file = File::open(get_full_path_file(path)).expect("File not found");
+    let mut data = String::new();
+    file.read_to_string(&mut data).expect("Failed to read file");
+    data
+}
+
 fn main() {
-    let (mode, save, load_file, file) = parse_options();
+    let (_mode, _save, load_file, file) = parse_options();
     if verify_files_exist(&load_file, &file) {
         std::process::exit(84);
     }
-    println!("Mode: {:?}", mode);
-    println!("Save: {}", save);
-    println!("Load file: {}", load_file);
-    println!("File: {}", file);
+    let _ = NeuralNetwork::new_from_data(NeuralNetworkData::new(get_file_content(load_file)));
 }
